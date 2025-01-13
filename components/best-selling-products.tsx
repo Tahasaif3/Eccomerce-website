@@ -5,7 +5,6 @@ import { FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import { useCart } from "../context/cartContext";
 import { toast } from 'sonner';
-import { number } from "zod";
 
 interface Product {
   id: string;
