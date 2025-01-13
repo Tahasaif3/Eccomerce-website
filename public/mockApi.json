@@ -1,0 +1,25 @@
+[
+    {
+      "id": "1",
+      "name": "Ergonomic Chair",
+      "description": "A comfortable chair for long working hours",
+      "price": 199.99,
+      "image": "/placeholder.svg?height=200&width=200"
+    },
+    {
+      "id": "2",
+      "name": "Standing Desk",
+      "description": "Adjustable height desk for better posture",
+      "price": 299.99,
+      "image": "/placeholder.svg?height=200&width=200"
+    },
+    {
+      "id": "3",
+      "name": "Wireless Keyboard",
+      "description": "Sleek and responsive wireless keyboard",
+      "price": 79.99,
+      "image": "/placeholder.svg?height=200&width=200"
+    }
+  ]
+  
+  
