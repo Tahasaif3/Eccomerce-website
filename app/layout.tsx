@@ -4,9 +4,9 @@ import {Inter} from "next/font/google"
 import { CartProvider } from '../context/cartContext'
 import { AuthProvider } from '../context/authContext'
 import { WishlistProvider } from '../context/wishlist-context'
-
 import { ErrorBoundary } from '../components/error-boundary'
 import { Toaster } from 'sonner'
+import { Analytics } from "@vercel/analytics/react";
 import './globals.css'
 
 const poppins = Poppins({ 
@@ -39,6 +39,7 @@ export default function RootLayout({
         <CartProvider>
         <WishlistProvider>
         {children}
+        <Analytics />
         <Toaster/>
         </WishlistProvider>
         </CartProvider>
