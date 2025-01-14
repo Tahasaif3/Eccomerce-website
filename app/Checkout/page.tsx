@@ -21,6 +21,7 @@ export default function CheckoutPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
+
   const handlePlaceOrder = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
@@ -28,7 +29,6 @@ export default function CheckoutPage() {
     try {
       const formData = new FormData(e.currentTarget)
       
-      // Add cart items and total to form data
       formData.append('items', JSON.stringify(state.items))
       formData.append('total', state.total.toString())
       formData.append('paymentMethod', paymentMethod)
@@ -40,6 +40,17 @@ export default function CheckoutPage() {
         toast.success('Order placed successfully!', {
           description: `Tracking number: ${result.trackingNumber}`,
         })
+      
+        // Email notification in handlePlaceOrder
+        await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderDetails: result.orderDetails,
+            userEmail: formData.get('email'),
+          }),
+        });
+
         
         // Encode the order details for URL
         const orderDetailsParam = encodeURIComponent(JSON.stringify(result.orderDetails))
@@ -86,54 +97,6 @@ export default function CheckoutPage() {
 
 
       <div className="grid lg:grid-cols-2 gap-12">
-        {/* Billing Details Form
-        <div>
-          <h1 className="text-2xl font-semibold mb-6 ml-6">Billing Details</h1>
-          <form id="checkout-form" onSubmit={handlePlaceOrder} className="space-y-4 mb-8 ml-8 md:ml-auto">
-            <div>
-              <Label htmlFor="firstName" className="block text-sm font-medium text-gray-700">First Name*</Label>
-              <Input id="firstName" name="firstName" required className="bg-secondary/50" />
-            </div>
-            <div>
-              <Label htmlFor="companyName" className="block text-sm font-medium text-gray-700">Company Name</Label>
-              <Input id="companyName" name="companyName" className="bg-secondary/50" />
-            </div>
-            <div>
-              <Label htmlFor="streetAddress" className="block text-sm font-medium text-gray-700">Street Address*</Label>
-              <Input id="streetAddress" name="streetAddress" required className="bg-secondary/50" />
-            </div>
-            <div>
-              <Label htmlFor="apartment" className="block text-sm font-medium text-gray-700">Apartment, floor, etc. (optional)</Label>
-              <Input id="apartment" name="apartment" className="bg-secondary/50" />
-            </div>
-            <div>
-              <Label htmlFor="townCity" className="block text-sm font-medium text-gray-700">Town/City*</Label>
-              <Input id="townCity" name="townCity" required className="bg-secondary/50" />
-            </div>
-            <div>
-              <Label htmlFor="state" className="block text-sm font-medium text-gray-700">State*</Label>
-              <Input id="state" name="state" required className="bg-secondary/50" />
-            </div>
-            <div>
-              <Label htmlFor="zipCode" className="block text-sm font-medium text-gray-700">ZIP Code*</Label>
-              <Input id="zipCode" name="zipCode" required className="bg-secondary/50" />
-            </div>
-            <div>
-              <Label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">Phone Number*</Label>
-              <Input id="phoneNumber" name="phoneNumber" required className="bg-secondary/50" />
-            </div>
-            <div>
-              <Label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address*</Label>
-              <Input id="email" name="email" type="email" required className="bg-secondary/50" />
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox id="save-info" />
-              <Label htmlFor="save-info" className="text-sm">
-                Save this information for faster check-out next time
-              </Label>
-            </div>
-          </form>
-        </div> */}
         {/* Billing Details Form */}
 <div>
   <h1 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 ml-4 sm:ml-6">Billing Details</h1>
@@ -222,6 +185,7 @@ export default function CheckoutPage() {
                   <div>
                     <span>{item.name}</span>
                     <p className="text-sm text-muted-foreground">Quantity: {item.quantity}</p>
+                    <p className="text-sm text-muted-foreground">Size: {item.size}</p>
                   </div>
                 </div>
                 <span>${(item.price * item.quantity).toFixed(2)}</span>
