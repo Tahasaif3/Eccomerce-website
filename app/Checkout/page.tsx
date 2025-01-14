@@ -74,10 +74,8 @@ export default function CheckoutPage() {
   return (
     <div className="container min-h-screen mx-auto">
       <Navbar/>
-      <nav className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground mb-6 sm:mb-8 ml-4 sm:ml-8 mt-4 sm:mt-8">
+      <nav className="flex items-center gap-2 text-xs sm:text-xs text-muted-foreground mb-6 sm:mb-8 ml-4 sm:ml-8 mt-4 sm:mt-8">
   <Link href="/account" className="hover:text-primary">Account</Link>
-  <span>/</span>
-  <Link href="/account" className="hover:text-primary">My Account</Link>
   <span>/</span>
   <Link href="/product" className="hover:text-primary">Product</Link>
   <span>/</span>
@@ -88,10 +86,10 @@ export default function CheckoutPage() {
 
 
       <div className="grid lg:grid-cols-2 gap-12">
-        {/* Billing Details Form */}
+        {/* Billing Details Form
         <div>
           <h1 className="text-2xl font-semibold mb-6 ml-6">Billing Details</h1>
-          <form id="checkout-form" onSubmit={handlePlaceOrder} className="space-y-4 mb-8 ml-8">
+          <form id="checkout-form" onSubmit={handlePlaceOrder} className="space-y-4 mb-8 ml-8 md:ml-auto">
             <div>
               <Label htmlFor="firstName" className="block text-sm font-medium text-gray-700">First Name*</Label>
               <Input id="firstName" name="firstName" required className="bg-secondary/50" />
@@ -135,7 +133,78 @@ export default function CheckoutPage() {
               </Label>
             </div>
           </form>
-        </div>
+        </div> */}
+        {/* Billing Details Form */}
+<div>
+  <h1 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 ml-4 sm:ml-6">Billing Details</h1>
+  <form 
+    id="checkout-form" 
+    onSubmit={handlePlaceOrder} 
+    className="space-y-4 mb-6 sm:mb-8 ml-4 sm:ml-8 md:ml-auto"
+  >
+    <div>
+      <Label htmlFor="firstName" className="block text-xs sm:text-sm font-medium text-gray-700">
+        First Name*
+      </Label>
+      <Input id="firstName" name="firstName" required className="bg-secondary/50 w-full" />
+    </div>
+    <div>
+      <Label htmlFor="companyName" className="block text-xs sm:text-sm font-medium text-gray-700">
+        Company Name
+      </Label>
+      <Input id="companyName" name="companyName" className="bg-secondary/50 w-full" />
+    </div>
+    <div>
+      <Label htmlFor="streetAddress" className="block text-xs sm:text-sm font-medium text-gray-700">
+        Street Address*
+      </Label>
+      <Input id="streetAddress" name="streetAddress" required className="bg-secondary/50 w-full" />
+    </div>
+    <div>
+      <Label htmlFor="apartment" className="block text-xs sm:text-sm font-medium text-gray-700">
+        Apartment, floor, etc. (optional)
+      </Label>
+      <Input id="apartment" name="apartment" className="bg-secondary/50 w-full" />
+    </div>
+    <div>
+      <Label htmlFor="townCity" className="block text-xs sm:text-sm font-medium text-gray-700">
+        Town/City*
+      </Label>
+      <Input id="townCity" name="townCity" required className="bg-secondary/50 w-full" />
+    </div>
+    <div>
+      <Label htmlFor="state" className="block text-xs sm:text-sm font-medium text-gray-700">
+        State*
+      </Label>
+      <Input id="state" name="state" required className="bg-secondary/50 w-full" />
+    </div>
+    <div>
+      <Label htmlFor="zipCode" className="block text-xs sm:text-sm font-medium text-gray-700">
+        ZIP Code*
+      </Label>
+      <Input id="zipCode" name="zipCode" required className="bg-secondary/50 w-full" />
+    </div>
+    <div>
+      <Label htmlFor="phoneNumber" className="block text-xs sm:text-sm font-medium text-gray-700">
+        Phone Number*
+      </Label>
+      <Input id="phoneNumber" name="phoneNumber" required className="bg-secondary/50 w-full" />
+    </div>
+    <div>
+      <Label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-700">
+        Email Address*
+      </Label>
+      <Input id="email" name="email" type="email" required className="bg-secondary/50 w-full" />
+    </div>
+    <div className="flex items-center space-x-2">
+      <Checkbox id="save-info" />
+      <Label htmlFor="save-info" className="text-xs sm:text-sm">
+        Save this information for faster check-out next time
+      </Label>
+    </div>
+  </form>
+</div>
+
 
         <div className="space-y-6 mt-12">
           {/* Products */}
