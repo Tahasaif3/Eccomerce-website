@@ -171,7 +171,7 @@ const OrderSuccessContent = () => {
         </CardContent>
       </Card>
 
-      <div className="flex justify-center gap-4 mt-8">
+      {/* <div className="flex justify-center gap-4 mt-8">
         <Button
           onClick={() => printLabel(orderDetails)}
           variant="outline"
@@ -191,7 +191,31 @@ const OrderSuccessContent = () => {
             Continue Shopping
           </Button>
         </Link>
-      </div>
+      </div> */}
+      <div className="flex flex-col md:flex-row justify-center gap-4 mt-8">
+  <Button
+    onClick={() => printLabel(orderDetails)}
+    variant="outline"
+    className="flex gap-2 items-center justify-center md:w-auto w-full"
+  >
+    <Printer className="w-4 h-4" />
+    Print Shipping Label
+  </Button>
+  <Link href={`/track-order?tracking=${orderDetails.trackingNumber}`}>
+    <Button
+      variant="outline"
+      className="flex gap-2 items-center justify-center md:w-auto w-full"
+    >
+      Track Order
+      <ArrowRight className="w-4 h-4" />
+    </Button>
+  </Link>
+  <Link href="/">
+    <Button className="bg-red-500 hover:bg-red-600 text-white md:w-auto w-full">
+      Continue Shopping
+    </Button>
+  </Link>
+</div>
     </div>
   )
 }
